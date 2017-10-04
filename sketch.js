@@ -1,12 +1,16 @@
 // Zombulator by Hannah Birchem 
 
+var zombiex = 50;
+
 function setup() {
- createcanvas(800, 800);
+	createCanvas(800, 800);
 }
 
 function draw() {
-	fill(255, 0, 0);
- ellipse(50, 50, 80, 80);
+	background(255, 255, 255);
+	fill(252, 252, 136);
+	ellipse(zombiex, 50, 80, 80);
 	fill(150, 150, 200);
- ellipse(200, 100, 80, 80);
+	ellipse(200, 100, 80, 80);
+	zombiex = zombiex + 10;
 }
