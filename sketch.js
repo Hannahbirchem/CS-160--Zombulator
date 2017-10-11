@@ -19,8 +19,8 @@ var backgroundColor;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   backgroundColor = color(255, 255, 255);
-  zombieColor = color(105, 132, 75);
-  humanColor = color(random(200, 255), random(200, 255), random(200, 255));
+  zombieColor = color(151, 196, 123);
+  humanColor = color(226, 199, 124);
 }
 
 function draw() {
