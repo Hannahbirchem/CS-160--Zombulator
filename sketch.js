@@ -56,11 +56,15 @@ function initializeHumans() {
   humanSizes = [];
   humanColors = [];
   for (var i = 0; i < NUMBER_OF_HUMANS; ++i) {
-    humanXs[i] = random(0, windowWidth);
-    humanYs[i] = random(windowHeight - 200, windowHeight);
-    humanSizes[i] = random(MIN_SIZE, MAX_SIZE);
-    humanColors[i] = color(random(50, 150), random(50, 150), random(150, 255), 150);
+    initializeHuman(i);
   }
+}   
+
+function initializeHuman(index) { 
+    humanXs[index] = random(0, windowWidth);
+    humanYs[index] = random(windowHeight - 200, windowHeight);
+    humanSizes[index] = random(MIN_SIZE, MAX_SIZE);
+    humanColors[index] = color(random(50, 150), random(50, 150), random(150, 255), 150);
 }
 
 function drawZombies() {
@@ -76,7 +80,12 @@ function drawZombie(index) {
 
 function drawHumans() {
   for (var i = 0; i < NUMBER_OF_HUMANS; ++i) {
-    fill(humanColors[i]);
-    ellipse(humanXs[i], humanYs[i], humanSizes[i], humanSizes[i]);
+    drawHuman(i);
   }
+} 
+
+function drawHuman(index) {
+    fill(humanColors[index]);
+    ellipse(humanXs[index], humanYs[index], humanSizes[index], humanSizes[index]);
 }
+
