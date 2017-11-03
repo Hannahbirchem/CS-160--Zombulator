@@ -1,6 +1,6 @@
-// http://tinyurl.com/cs160ex19
+// http://tinyurl.com/cs160ex20
 // Zombulator by Hannah Birchem
-// CS 160 Exercise 19: Polymorphism
+// CS 160 Exercise 20: Collisions
 
 var backgroundColor;
 
@@ -10,29 +10,42 @@ const POPULATION_SIZE = 500;
 
 var population = [];
 
+var zombieCount = 0;
+var humanCount = 0;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   backgroundColor = color(245, 255, 245);
   initializePopulation();
 }
 
-
 function draw() {
   background(backgroundColor);
   noStroke();
   drawPopulation();
   movePopulation();
+  drawPopulationCounts();
 }
 
 function initializePopulation() {
   for (var i = 0; i < POPULATION_SIZE; ++i) {
-    var humanoid_type = random (0, 100);
+    var humanoid_type = random(0, 100);
     if (humanoid_type <= 50) {
       population[i] = initializeZombie();
+      ++zombieCount;
     } else {
       population[i] = initializeHuman();
+      ++humanCount;
     }
   }
+}
+
+function drawPopulationCounts() {
+  stroke(0);
+  textSize(72);
+  textAlign(CENTER);
+  text("Zombies: " + zombieCount, width / 2, 100);
+  text("Humans: " + humanCount, width / 2, height - 100);
 }
 
 function drawPopulation() {
@@ -46,8 +59,6 @@ function movePopulation() {
     population[i].move();
   }
 }
-
-// Zombies. Raaahh!
 
 function initializeZombie() {
   return {
@@ -75,28 +86,28 @@ function initializeZombie() {
   };
 }
 
-function initializeHuman(index) {
+function initializeHuman() {
   return {
     x: random(0, windowWidth),
     y: random(windowHeight - 200, windowHeight),
     speed: random(0.25, 3),
     size: random(MIN_SIZE, MAX_SIZE),
     color: color(random(50, 150), random(50, 150), random(150, 255), 150),
-    draw: function() {
-      fill(this.color);
-      ellipse(this.x, this.y, this.size, this.size);
-    },
     move: function() {
-      var direction = random(0, 100);
-      if (direction < 20) {
-        this.x += this.speed;
-      } else if (direction < 40) {
-        this.x -= this.speed;
-      } else if (direction < 60) {
-        this.y += this.speed;
-      } else {
-        this.y -= this.speed;
-      }
+        var direction = random(0, 100);
+        if (direction < 20) {
+          this.x += this.speed;
+        } else if (direction < 40) {
+          this.x -= this.speed;
+        } else if (direction < 60) {
+          this.y += this.speed;
+        } else {
+          this.y -= this.speed;
+        }
+      },
+    draw: function() {
+        fill(this.color);
+        ellipse(this.x, this.y, this.size, this.size);
     }
-  }
+  };
 }
